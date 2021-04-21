@@ -1,0 +1,19 @@
+version: '3'
+services:
+  jenkins_master:
+    image: jenkins/jenkins
+    volumes:
+      - ./jenkins_home_master:/var/jenkins_home:rw
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 9000:8080
+      - 50000:50000
+
+  jenkins_agent:
+    image: dahachm/js_example:jenkins-agent-alpine
+    volumes:
+      - ./jenkins_home_agent:/var/jenkins_home:rw
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - SSH_PUBLIC_KEY=${SSH_PUBLIC_KEY}
+    tty: true
