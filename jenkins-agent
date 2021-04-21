@@ -1,0 +1,22 @@
+FROM alpine:3.12
+
+RUN apk update \
+    && apk add \
+       openrc \
+       openssh \
+       openssh-server \
+       python3 \
+       py3-pip \
+       openjdk8 \
+       git \
+       ansible \
+       docker \
+       curl
+
+RUN adduser -D jenkins
+
+ENV SSH_PUBLIC_KEY ''
+
+COPY setup-ssh.sh /usr/local/setup-ssh.sh
+
+CMD /bin/sh /usr/local/setup-ssh.sh && tail -f /dev/null
