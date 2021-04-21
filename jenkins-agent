@@ -14,7 +14,7 @@ RUN apk update \
        curl
 
 RUN adduser -D jenkins
-
+ 
 ENV SSH_PUBLIC_KEY ''
 
 COPY setup-ssh.sh /usr/local/setup-ssh.sh
